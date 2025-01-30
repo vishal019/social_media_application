@@ -1,0 +1,428 @@
+
+
+
+
+
+
+@foreach ( $creative_data as $c_Data )
+<div class="post-card">
+   <!-- Post Header -->
+   <div class="post-header">
+      <img src="{{ asset('storage/logo2.png') }}" alt="Profile">
+      <div>
+         <h6>{{$c_Data->username}}</h6>
+         <p class="text-muted mb-0" style="font-size: 14px;">@ {{$c_Data->username}} </p>
+      </div>
+   </div>
+   <!-- Post Content -->
+   <div class="post-content">
+      {{$c_Data->description}}
+   </div>
+   <!-- Post Image -->
+   <div class="post-image">
+      @if (in_array($c_Data->extension, ['jpg', 'jpeg', 'png', 'gif']))
+      <img src="{{ url('storage/'.$c_Data->photo_or_video) }}" alt="Post">
+      @elseif ($c_Data->extension == "mp4")
+      <video id="videoPlayer" controls >
+         <source src="{{ url('storage/'.$c_Data->photo_or_video) }}" type="video/mp4">
+         Your browser does not support the video tag.
+      </video>
+      @else
+      <p>video not supported</p>
+      @endif
+   </div>
+   <!-- Post Actions -->
+   <div class="post-actions">
+    <form action="posts/{{$c_Data->id}}/likes" method="POST">
+       @csrf
+       <input type="hidden" name="" value="{{$c_Data->id}}">
+      <button type="submit" ><i class="fa-solid fa-thumbs-up"></i>{{count($c_Data->likes)}}</button>
+
+
+    </form>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#commentModal"><i class="fa-solid fa-comment"></i>{{count($comments)}} </button>
+      <!-- Modal -->
+      <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-right: 0">Close</button>
+                  {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
+               </div>
+               <div class="modal-body">
+                  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+                 
+                  <div class="container">
+                     <!-- Tweet Card -->
+
+                        <hr class="border-secondary">
+                        <div class="d-flex align-items-start">
+                           <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="Your Profile" class="profile-img me-2">
+                           <form action="/posts/{{$c_Data->id}}/comments" method="post">
+                              @csrf
+                              <input type="hidden" name="userid" value="{{Auth::user()->id}}">
+                              <input type="hidden" name="post_id" value="{{$c_Data->id}}">
+                              <input type="text" class="flex-grow-1 reply-box" name="comment" placeholder="Post your reply" required>
+                        </div>
+                        <div class="d-flex justify-content-end mt-2">
+                        <button type="submit" class="reply-btn">Comment</button>
+                        </div>
+                        </form>
+                     </div>
+                  </div>
+                  <!-- Bootstrap JS -->
+                  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Bootstrap JS Bundle -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+      {{-- <button><i class="fa-solid fa-share"></i> Share</button> --}}
+   </div>
+</div>
+@endforeach
+
+
+
+
+
+
+
+
+
+
+
+
+
+@foreach ( $style_data as $s_Data )
+<div class="post-card">
+   <!-- Post Header -->
+   <div class="post-header">
+      <img src="{{ asset('storage/logo2.png') }}" alt="Profile">
+      <div>
+         <h6>{{$s_Data->username}}</h6>
+         <p class="text-muted mb-0" style="font-size: 14px;">@ {{$s_Data->username}} </p>
+      </div>
+   </div>
+   <!-- Post Content -->
+   <div class="post-content">
+      {{$s_Data->description}}
+   </div>
+   <!-- Post Image -->
+   <div class="post-image">
+      @if (in_array($s_Data->extension, ['jpg', 'jpeg', 'png', 'gif']))
+      <img src="{{ url('storage/'.$s_Data->photo_or_video) }}" alt="Post">
+      @elseif ($c_Data->extension == "mp4")
+      <video id="videoPlayer" controls >
+         <source src="{{ url('storage/'.$s_Data->photo_or_video) }}" type="video/mp4">
+         Your browser does not support the video tag.
+      </video>
+      @else
+      <p>video not supported</p>
+      @endif
+   </div>
+   <!-- Post Actions -->
+   <div class="post-actions">
+    <form action="posts/{{$s_Data->id}}/likes" method="POST">
+       @csrf
+       <input type="hidden" name="" value="{{$s_Data->id}}">
+      <button type="submit" ><i class="fa-solid fa-thumbs-up"></i>{{count($s_Data->likes)}}</button>
+
+
+    </form>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#commentModal"><i class="fa-solid fa-comment"></i>{{count($comments)}} </button>
+      <!-- Modal -->
+      <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-right: 0">Close</button>
+                  {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
+               </div>
+               <div class="modal-body">
+                  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+                 
+                  <div class="container">
+                     <!-- Tweet Card -->
+
+
+                    
+        
+                        <hr class="border-secondary">
+                        <div class="d-flex align-items-start">
+                           <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="Your Profile" class="profile-img me-2">
+                           <form action="/posts/{{$s_Data->id}}/comments" method="post">
+                              @csrf
+                              <input type="hidden" name="userid" value="{{Auth::user()->id}}">
+                              <input type="hidden" name="post_id" value="{{$s_Data->id}}">
+                              <input type="text" class="flex-grow-1 reply-box" name="comment" placeholder="Post your reply" required>
+                        </div>
+                        <div class="d-flex justify-content-end mt-2">
+                        <button type="submit" class="reply-btn">Comment</button>
+                        </div>
+                        </form>
+                     </div>
+                  </div>
+                  <!-- Bootstrap JS -->
+                  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Bootstrap JS Bundle -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+      {{-- <button><i class="fa-solid fa-share"></i> Share</button> --}}
+   </div>
+<!-- </div> -->
+@endforeach
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@foreach ( $beauty_data as $b_Data )
+<div class="post-card">
+   <!-- Post Header -->
+   <div class="post-header">
+      <img src="{{ asset('storage/logo2.png') }}" alt="Profile">
+      <div>
+         <h6>{{$b_Data->username}}</h6>
+         <p class="text-muted mb-0" style="font-size: 14px;">@ {{$b_Data->username}} </p>
+      </div>
+   </div>
+   <!-- Post Content -->
+   <div class="post-content">
+      {{$b_Data->description}}
+   </div>
+   <!-- Post Image -->
+   <div class="post-image">
+      @if (in_array($b_Data->extension, ['jpg', 'jpeg', 'png', 'gif']))
+      <img src="{{ url('storage/'.$c_Data->photo_or_video) }}" alt="Post">
+      @elseif ($c_Data->extension == "mp4")
+      <video id="videoPlayer" controls >
+         <source src="{{ url('storage/'.$b_Data->photo_or_video) }}" type="video/mp4">
+         Your browser does not support the video tag.
+      </video>
+      @else
+      <p>video not supported</p>
+      @endif
+   </div>
+   <!-- Post Actions -->
+   <div class="post-actions">
+    <form action="posts/{{$b_Data->id}}/likes" method="POST">
+       @csrf
+       <input type="hidden" name="" value="{{$b_Data->id}}">
+      <button type="submit" ><i class="fa-solid fa-thumbs-up"></i>{{count($b_Data->likes)}}</button>
+
+
+    </form>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#commentModal"><i class="fa-solid fa-comment"></i>{{count($comments)}} </button>
+      <!-- Modal -->
+      <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-right: 0">Close</button>
+                  {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
+               </div>
+               <div class="modal-body">
+                  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+                 
+                  <div class="container">
+
+                        <hr class="border-secondary">
+                        <div class="d-flex align-items-start">
+                           <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="Your Profile" class="profile-img me-2">
+                           <form action="/posts/{{$b_Data->id}}/comments" method="post">
+                              @csrf
+                              <input type="hidden" name="userid" value="{{Auth::user()->id}}">
+                              <input type="hidden" name="post_id" value="{{$b_Data->id}}">
+                              <input type="text" class="flex-grow-1 reply-box" name="comment" placeholder="Post your reply" required>
+                        </div>
+                        <div class="d-flex justify-content-end mt-2">
+                        <button type="submit" class="reply-btn">Comment</button>
+                        </div>
+                        </form>
+                     </div>
+                  </div>
+                  <!-- Bootstrap JS -->
+                  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Bootstrap JS Bundle -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+      {{-- <button><i class="fa-solid fa-share"></i> Share</button> --}}
+   </div>
+<!-- </div> -->
+@endforeach
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="col-md-6" style="padding-top: 0px">
+              
+  <!-- Tab Buttons -->
+  <ul class="nav nav-tabs" id="myTab" role="tablist" style="justify-content:center">
+     <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="creative-tab" data-bs-toggle="tab" data-bs-target="#creative" type="button" role="tab" aria-controls="creative" aria-selected="true">Creative</button>
+     </li>
+     <li class="nav-item" role="presentation">
+        <button class="nav-link" id="style-tab" data-bs-toggle="tab" data-bs-target="#style" type="button" role="tab" aria-controls="style" aria-selected="false">Style</button>
+     </li>
+     <li class="nav-item" role="presentation">
+        <button class="nav-link" id="beauty-tab" data-bs-toggle="tab" data-bs-target="#beauty" type="button" role="tab" aria-controls="beauty" aria-selected="false">Beauty</button>
+     </li>
+  </ul>
+  <!-- Tab Content -->
+  <div class="tab-content mt-4" id="myTabContent">
+     <div class="tab-pane fade show active" id="creative" role="tabpanel" aria-labelledby="creative-tab">
+        <div class="card mb-2">
+           <div class="card-body">
+              {{-- creative page  --}}
+             
+              <p>creative</p>
+         
+              <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+              <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>
+           </div>
+        </div>
+     </div>
+
+
+     <div class="tab-pane fade" id="style" role="tabpanel" aria-labelledby="style-tab">
+        <div class="card mb-2">
+           <div class="card-body">
+          <p>style</p>
+           </div>
+        </div>
+
+        
+     </div>
+
+
+     <div class="tab-pane fade" id="beauty" role="tabpanel" aria-labelledby="beauty-tab">
+      <div class="card mb-2">
+         <div class="card-body">
+           
+         
+        <p>beauty</p>
+          
+         </div>
+      </div>
+   </div>
+    
+  </div>
+
+</div>
+
+
+
+
+
+<!-- updtaed creative  -->
+
+
+
+@foreach ( $creative_data as $c_Data )
+<div class="post-card">
+   <!-- Post Header -->
+   <div class="post-header">
+      <img src="{{ asset('storage/logo2.png') }}" alt="Profile">
+      <div>
+         <h6>{{$c_Data->username}}</h6>
+         <p class="text-muted mb-0" style="font-size: 14px;">@ {{$c_Data->username}} </p>
+      </div>
+   </div>
+   <!-- Post Content -->
+   <div class="post-content">
+      {{$c_Data->description}}
+   </div>
+   <!-- Post Image -->
+   <div class="post-image">
+      @if (in_array($c_Data->extension, ['jpg', 'jpeg', 'png', 'gif']))
+      <img src="{{ url('storage/'.$c_Data->photo_or_video) }}" alt="Post">
+      @elseif ($c_Data->extension == "mp4")
+      <video id="videoPlayer" controls >
+         <source src="{{ url('storage/'.$c_Data->photo_or_video) }}" type="video/mp4">
+         Your browser does not support the video tag.
+      </video>
+      @else
+      <p>video not supported</p>
+      @endif
+   </div>
+   <!-- Post Actions -->
+   <div class="post-actions">
+    <form action="posts/{{$c_Data->id}}/likes" method="POST">
+       @csrf
+       <input type="hidden" name="" value="{{$c_Data->id}}">
+      <button type="submit" ><i class="fa-solid fa-thumbs-up"></i>{{count($c_Data->likes)}}</button>
+
+
+    </form>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#commentModal"><i class="fa-solid fa-comment"></i>{{count($comments)}} </button>
+      <!-- Modal -->
+      <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-right: 0">Close</button>
+                  {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
+               </div>
+               <div class="modal-body">
+                  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+                 
+                  <div class="container">
+                     <!-- Tweet Card -->
+
+                        <hr class="border-secondary">
+                        <div class="d-flex align-items-start">
+                           <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="Your Profile" class="profile-img me-2">
+                           <form action="/posts/{{$c_Data->id}}/comments" method="post">
+                              @csrf
+                              <input type="hidden" name="userid" value="{{Auth::user()->id}}">
+                              <input type="hidden" name="post_id" value="{{$c_Data->id}}">
+                              <input type="text" class="flex-grow-1 reply-box" name="comment" placeholder="Post your reply" required>
+                        </div>
+                        <div class="d-flex justify-content-end mt-2">
+                        <button type="submit" class="reply-btn">Comment</button>
+                        </div>
+                        </form>
+                     </div>
+                  </div>
+                  <!-- Bootstrap JS -->
+                  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Bootstrap JS Bundle -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+      {{-- <button><i class="fa-solid fa-share"></i> Share</button> --}}
+   </div>
+{{-- </div> --}}
+@endforeach
