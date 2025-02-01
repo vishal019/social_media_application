@@ -39,7 +39,7 @@
                     
                     <a href="{{ route('dashboard') }}">
 
-                        <img src="{{ asset('storage/logo2.png') }}" style="height:70px;width:70px;padding-bottom:10px;padding-top:10px" alt="Image">
+                        <img src="{{ asset('storage/logo.png') }}" style="height:70px;width:90px;padding-bottom:10px;padding-top:10px" alt="Image">
 
 
 
@@ -82,7 +82,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                      Qoeens
+                   
                     </x-nav-link>
                  
                     <div class="input-group" style="padding-top: 20px;">

@@ -12,7 +12,7 @@
                 <div class="card-body">
                   <div class="d-flex flex-start align-items-center">
                     <img class="rounded-circle shadow-1-strong me-3"
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp" alt="avatar" width="60"
+                      src="{{ asset('storage/logo2.png') }}" alt="avatar" width="60"
                       height="60" />
                     <div>
                       <h6 class="fw-bold text-primary mb-1">{{ \App\Models\User::where('id', $comment->user_id)->first()->name}}</h6>
@@ -34,7 +34,7 @@
                 <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
                   <div class="d-flex flex-start w-100">
                     <img class="rounded-circle shadow-1-strong me-3"
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp" alt="avatar" width="80"
+                      src="{{ asset('storage/logo2.png') }}" alt="avatar" width="80"
                       height="40" />
                      
                       <form action="/posts/{{$post_id}}/comments" method="post">
