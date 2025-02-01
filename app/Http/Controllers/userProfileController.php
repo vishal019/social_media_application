@@ -16,6 +16,7 @@ class userProfileController extends Controller
             
             
           
+           
             return view('forntend.profile',compact('userData','following'));
 
     }

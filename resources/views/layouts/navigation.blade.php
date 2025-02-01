@@ -145,6 +145,13 @@
                                               <label for="attachFile" class="btn btn-primary">Attach File</label>
                                               <input type="file" id="attachFile" class="d-none" multiple accept="image/*,video/*" name="imgorvideo">
                                             </div>
+                                            <br>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" required>
+                                              <label class="form-check-label" for="flexCheckDefault">
+                                               <a href="term_and_condition" style="color: blue">Term and conditions</a>
+                                              </label>
+                                            </div>
                                           
                                           <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
                                         <script>
