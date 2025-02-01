@@ -28,9 +28,9 @@ class dashboardController extends Controller
        $followerData =followModel::all('following_id'); 
     //    $following = followModel::all();
         $category_id = createPostModel::all('id');
-       $creative_data = createPostModel::where('category',1)->with('comments')->with('likes')->get();
-       $style_data = createPostModel::where('category',2)->with('comments')->with('likes')->get();
-       $beauty_data = createPostModel::where('category',3)->with('comments')->with('likes')->get();
+       $creative_data = createPostModel::where('category',1)->with('comments')->with('likes')->orderBy('created_at', 'desc')->get();
+       $style_data = createPostModel::where('category',2)->with('comments')->with('likes')->orderBy('created_at', 'desc')->get();
+       $beauty_data = createPostModel::where('category',3)->with('comments')->with('likes')->orderBy('created_at', 'desc')->get();
 
         return view('dashboard',compact('data','creative_data','style_data','beauty_data','followerData','following','comments','category_id'));
 

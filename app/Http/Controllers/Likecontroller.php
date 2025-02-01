@@ -13,12 +13,12 @@ class Likecontroller extends Controller
 
         // Check if the user has already liked the post
         if ($post->likes()->where('user_id', auth()->id())->exists()) {
-            return response()->json(['message' => 'You have already liked this post'], 400);
+            return redirect()->back();
         }
 
         $like = $post->likes()->create(['user_id' => auth()->id()]);
 
-        return response()->json(['message' => 'Post liked successfully', 'like' => $like], 201);
+        return redirect()->back()->with('success', 'like added successfully!');
     }
 
     public function destroy($postId)
